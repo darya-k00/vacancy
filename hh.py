@@ -96,6 +96,15 @@ def find_jobs_hh():
     return jobs_hh
 
 
+def predict_rub_salary_sj(current_vacancie):
+    currency = current_vacancie["currency"]
+    if currency != "rub":
+        return None
+    salary_min = current_vacancie["payment_from"]
+    salary_max = current_vacancie["payment_to"]
+    return predict_rub_salary(salary_min,salary_max)
+
+
 def find_jobs_superjob(secret_key):
     jobs_superjob = dict()
     programming_languages = [
@@ -144,7 +153,7 @@ def find_jobs_superjob(secret_key):
                 salary_from = vacancy.get('payment_from')
                 salary_to = vacancy.get('payment_to')
                 if salary_from or salary_to:
-                    salary = predict_rub_salary(salary_from, salary_to)
+                    salary =  predict_rub_salary_sj(current_vacancie)
                     if salary:
                         salaries.append(salary)
             page += 1
