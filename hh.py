@@ -80,7 +80,7 @@ def find_jobs_hh():
                     if salary:
                         salaries.append(salary)
 
-            if vacancies_from_page['pages'] == page + 1:
+            if page + 1 >= vacancies_from_page['pages']:
                 break
 
             page += 1
@@ -100,9 +100,9 @@ def predict_rub_salary_sj(current_vacancie):
     currency = current_vacancie["currency"]
     if currency != "rub":
         return None
-    salary_min = current_vacancie["payment_from"]
-    salary_max = current_vacancie["payment_to"]
-    return predict_rub_salary(salary_min,salary_max)
+    salary_from = current_vacancie["payment_from"]
+    salary_to = current_vacancie["payment_to"]
+    return predict_rub_salary(salary_from, salary_to)
 
 
 def find_jobs_superjob(secret_key):
@@ -150,12 +150,9 @@ def find_jobs_superjob(secret_key):
                 break
 
             for vacancy in vacancies_from_page:
-                salary_from = vacancy.get('payment_from')
-                salary_to = vacancy.get('payment_to')
-                if salary_from or salary_to:
-                    salary =  predict_rub_salary_sj(current_vacancie)
-                    if salary:
-                        salaries.append(salary)
+                salary =  predict_rub_salary_sj(current_vacancie)
+                 if salary:
+                    salaries.append(salary)
             page += 1
 
         if salaries:
