@@ -172,8 +172,8 @@ if __name__ == '__main__':
     load_dotenv()
     secret_key = os.environ['SUPERJOB_KEY']
     
-    hh_table = find_jobs_hh()
-    superjob_table = find_jobs_superjob(secret_key)
+    hh_vacancy = find_jobs_hh()
+    superjob_vacancy = find_jobs_superjob(secret_key)
 
-    print(create_table(hh_table, 'HH Moscow'))
-    print(create_table(superjob_table, 'SuperJob Moscow'))
+    print(create_table(hh_vacancy, 'HH Moscow'))
+    print(create_table(superjob_vacancy, 'SuperJob Moscow'))
