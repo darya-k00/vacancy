@@ -14,12 +14,12 @@ def create_table(table, title):
         ]
     ]
 
-    for language, info in table.items():
+    for language, statistic in table.items():
         table_data.append([
             language,
-            info['vacancies_found'],
-            info['vacancies_processed'],
-            info['average_salary']
+            statistic['vacancies_found'],
+            statistic['vacancies_processed'],
+            statistic['average_salary']
         ])
     
     return AsciiTable(table_data)
